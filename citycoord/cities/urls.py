@@ -1,14 +1,11 @@
-from django.urls import include, path
-from rest_framework import routers
+from django.urls import path
 
 from . import views
 
-router = routers.DefaultRouter()
-router.register(r'cities', views.CityViewSet, basename='cities')
-
 urlpatterns = [
     path('', views.reverse_on_api),
-    path('api/v1/delete/', views.CityViewSet.as_view({'DELETE': 'delete_city'})),
-    path('api/v1/', include(router.urls)),
+    path('api/v1/cities/', views.GetCityViewSet.as_view({'get': 'list'}), name='list'),
+    path('api/v1/cities/create/', views.CRUDCityViewSet.as_view({'post': 'create'})),
+    path('api/v1/cities/delete/', views.CRUDCityViewSet.as_view({'delete': 'destroy'})),
 
 ]

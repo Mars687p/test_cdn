@@ -5,13 +5,11 @@ from .models import City
 from .services import get_coord_by_name
 
 
-class CitySerializer(serializers.ModelSerializer):
+class CreateCitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = (
             'name',
-            'longitude',
-            'latitude',
         )
 
     def create(self, validated_data: dict) -> City:
@@ -21,3 +19,13 @@ class CitySerializer(serializers.ModelSerializer):
             if len(city) != 0:
                 return city.values()
             return City.objects.create(**city_coord)
+
+
+class GetCitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = (
+            'name',
+            'longitude',
+            'latitude',
+        )

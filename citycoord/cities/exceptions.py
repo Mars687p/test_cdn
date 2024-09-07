@@ -1,6 +1,6 @@
-class RequestGeocoderUncomplited(BaseException):
+class RequestGeocoderUncomplited(Exception):
     "Запрос не выполнен"
 
 
-class EmptyResponseGEocoder(BaseException):
+class EmptyResponseGEocoder(Exception):
     """Не удалось найти город"""

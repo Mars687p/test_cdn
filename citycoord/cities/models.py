@@ -31,6 +31,11 @@ class City(models.Model):
 
     @staticmethod
     def get_nearest_cities(latitude, longitude) -> list[CityResponseDict]:
+        """Здесь используется сырой запрос, который из строки с широтой и долготой
+           создает обьект PostGis, которая оптимизирована для работы с географическими
+           и геометрическими метками.
+           Запрос возвращает 2 ближайших города от заданных координат
+        """
         format_coord = 'SRID=4326;POINT({lat} {lng})'.format(lat=latitude,
                                                              lng=longitude)
 
