@@ -16,14 +16,12 @@ class CRUDCityViewSet(viewsets.ModelViewSet):
 
     def create(self, request: Request,
                *args: tuple, **kwargs: dict) -> Response:
-        print(request.data, 'in create')
         try:
             return super().create(request, *args, **kwargs)
         except (RequestGeocoderUncomplited, EmptyResponseGEocoder):
             return Response({'error': 'Не удалось найти город'}, 404)
 
     def destroy(self, request: Request) -> Response:
-        print(request.data)
         if request.data.get('name') is not None:
             city = City.objects.filter(
                                 name=request.data.get('name'))
